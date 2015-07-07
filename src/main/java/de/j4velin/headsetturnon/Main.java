@@ -17,8 +17,10 @@
 package de.j4velin.headsetturnon;
 
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -62,6 +64,18 @@ public class Main extends AppCompatActivity {
                 }
             });
         }
+        findViewById(R.id.logo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("market://search?q=pub:j4velin")));
+                } catch (ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/search?q=pub:j4velin")));
+                }
+            }
+        });
     }
 
     @Override

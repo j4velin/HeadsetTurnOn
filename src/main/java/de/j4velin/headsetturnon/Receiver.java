@@ -37,7 +37,7 @@ public class Receiver extends BroadcastReceiver {
             if (action == KeyEvent.ACTION_DOWN) {
                 PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
                 if (BuildConfig.DEBUG)
-                    android.util.Log.d("HeadsetTurnOn", "down, screen: " + pm.isScreenOn());
+                    android.util.Log.d("HeadsetTurnOn", "action_down, screen: " + pm.isScreenOn());
                 if (pm.isScreenOn()) {
                     if (BuildConfig.DEBUG) android.util.Log.d("HeadsetTurnOn", "is on");
                     AdminReceiver.lock(context);

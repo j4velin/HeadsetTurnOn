@@ -45,11 +45,11 @@ public class ListeningService extends Service {
         AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
         am.registerMediaButtonEventReceiver(new ComponentName(this, Receiver.class));
 
-
         NotificationCompat.Builder b = new NotificationCompat.Builder(this);
-        b.setOngoing(true).setContentText("Click to disable")
-                .setContentTitle("HeadsetTurnOn active").setSmallIcon(R.drawable.ic_notification)
-                .setContentIntent(PendingIntent.getActivity(this, 0,
+        b.setOngoing(true).setContentText(getString(R.string.notification_text))
+                .setContentTitle(getString(R.string.notification_title))
+                .setSmallIcon(R.drawable.ic_notification).setContentIntent(PendingIntent
+                .getActivity(this, 0,
                         new Intent(this, Main.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0));
 
         startForeground(1, b.build());

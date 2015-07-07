@@ -9,7 +9,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn your display on and off by pressing the media button on your headset.\nClick 'Start' to make the app listening for media button events"/>
+        android:layout_marginBottom="10dp"
+        android:text="@string/desc"/>
 
     <Button
         android:id="@+id/start"
@@ -18,7 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
-        android:text="Start"/>
+        android:text="@string/start"/>
 
     <Button
         android:id="@+id/stop"
@@ -27,7 +28,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView"
-        android:text="Stop"/>
+        android:text="@string/stop"/>
 
     <TextView
         android:id="@+id/admin"
@@ -36,6 +37,19 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/stop"
-        android:text="Device admin permission not granted - HeadsetTurnOn will not be able to turn off your display. Click here to change"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/admin_not_granted"
+        android:textColor="#f00"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/logo"
+        android:contentDescription="j4velin development"/>
 
 </RelativeLayout>

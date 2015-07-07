@@ -12,11 +12,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="HeadsetTurnOn"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
-            android:label="HeadsetTurnOn">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,16 +26,10 @@
 
         <activity
             android:name=".OnActivity"
-            android:label="HeadsetTurnOn"
-            android:process=":turnOn"
             android:theme="@style/Transparent"/>
 
-        <receiver android:name=".Receiver">
-            <!-- is this still necessary? //-->
-            <intent-filter android:priority="999999999">
-                <action android:name="android.intent.action.MEDIA_BUTTON"/>
-            </intent-filter>
-        </receiver>
+        <receiver android:name=".Receiver"/>
+
         <service android:name=".ListeningService"/>
 
         <receiver

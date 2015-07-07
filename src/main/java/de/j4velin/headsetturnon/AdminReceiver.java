@@ -27,7 +27,7 @@ public class AdminReceiver extends DeviceAdminReceiver {
 
     @Override
     public CharSequence onDisableRequested(final Context context, final Intent intent) {
-        return "Without this permission, HeadsetTurnOn will not be able to turn off the display!";
+        return context.getString(R.string.device_warning);
     }
 
     public static void lock(final Context context) {
