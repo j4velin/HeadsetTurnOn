@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_text">Click to disable</string>
+    <string name="notification_title">HeadsetTurnOn active</string>
+    <string name="device_warning">Without this permission, HeadsetTurnOn will not be able to turn off the display!</string>
+    <string name="app_name">HeadsetTurnOn</string>
+    <string name="admin_not_granted">Device admin permission not granted - HeadsetTurnOn will not be able to turn off your display. Click here to change</string>
+    <string name="desc">Turn your display on and off by pressing the media button on your headset.\nClick \'Start\' to make the app listening for media button events</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+</resources>
