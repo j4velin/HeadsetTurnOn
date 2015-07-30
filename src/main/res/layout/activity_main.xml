@@ -12,13 +12,24 @@
         android:layout_marginBottom="10dp"
         android:text="@string/desc"/>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginBottom="20dp"
+        android:text="@string/media_playback_warning"
+        android:textStyle="bold"/>
+
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textView2"
         android:text="@string/start"/>
 
     <Button
@@ -27,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textView2"
         android:text="@string/stop"/>
 
     <TextView
@@ -48,8 +59,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:contentDescription="j4velin development"
         android:scaleType="fitEnd"
-        android:src="@drawable/logo"
-        android:contentDescription="j4velin development"/>
+        android:src="@drawable/logo"/>
 
 </RelativeLayout>

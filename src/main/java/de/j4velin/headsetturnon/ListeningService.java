@@ -16,6 +16,7 @@
 
 package de.j4velin.headsetturnon;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
@@ -26,6 +27,28 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 public class ListeningService extends Service {
+
+    private final AudioManager.OnAudioFocusChangeListener focusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+                @Override
+                public void onAudioFocusChange(final int focusChange) {
+                    if (BuildConfig.DEBUG)
+                        android.util.Log.d("HeadsetTurnOn", "audioFocusChanged: " + focusChange);
+                    if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 500,
+                                PendingIntent.getService(ListeningService.this, 0,
+                                        new Intent(ListeningService.this, ListeningService.class),
+                                        0));
+                        stopSelf();
+                    } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                        AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
+                        am.registerMediaButtonEventReceiver(
+                                new ComponentName(ListeningService.this, Receiver.class));
+                    }
+
+                }
+            };
 
     @Nullable
     @Override
@@ -43,7 +66,13 @@ public class ListeningService extends Service {
     public int onStartCommand(final Intent intent, int flags, int startId) {
         if (BuildConfig.DEBUG) android.util.Log.d("HeadsetTurnOn", "service start");
         AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
-        am.registerMediaButtonEventReceiver(new ComponentName(this, Receiver.class));
+        boolean failed = am.requestAudioFocus(focusChangeListener, AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_FAILED;
+        am.registerMediaButtonEventReceiver(
+                new ComponentName(ListeningService.this, Receiver.class));
+
+        if (BuildConfig.DEBUG)
+            android.util.Log.d("HeadsetTurnOn", "request audiofocus failed? " + failed);
 
         NotificationCompat.Builder b = new NotificationCompat.Builder(this);
         b.setOngoing(true).setContentText(getString(R.string.notification_text))
@@ -63,6 +92,8 @@ public class ListeningService extends Service {
         if (BuildConfig.DEBUG) android.util.Log.d("HeadsetTurnOn", "service destroy");
         stopForeground(true);
         AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
-        am.unregisterMediaButtonEventReceiver(new ComponentName(this, Receiver.class));
+        am.unregisterMediaButtonEventReceiver(
+                new ComponentName(ListeningService.this, Receiver.class));
+        am.abandonAudioFocus(focusChangeListener);
     }
 }

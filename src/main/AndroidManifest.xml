@@ -2,8 +2,8 @@
 <manifest
     package="de.j4velin.headsetturnon"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="101"
+    android:versionName="1.0.1">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -28,7 +28,11 @@
             android:name=".OnActivity"
             android:theme="@style/Transparent"/>
 
-        <receiver android:name=".Receiver"/>
+        <receiver android:name=".Receiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
 
         <service android:name=".ListeningService"/>
 

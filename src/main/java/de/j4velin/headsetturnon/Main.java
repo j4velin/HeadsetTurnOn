@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,10 @@ public class Main extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                getPackageManager()
+                        .setComponentEnabledSetting(new ComponentName(Main.this, Receiver.class),
+                                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                PackageManager.DONT_KILL_APP);
                 startService(new Intent(Main.this, ListeningService.class));
                 finish();
             }
@@ -46,6 +51,10 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 stopService(new Intent(Main.this, ListeningService.class));
+                getPackageManager()
+                        .setComponentEnabledSetting(new ComponentName(Main.this, Receiver.class),
+                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                                PackageManager.DONT_KILL_APP);
                 finish();
             }
         });

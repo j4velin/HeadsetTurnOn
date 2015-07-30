@@ -8,4 +8,5 @@
     <string name="desc">Turn your display on and off by pressing the media button on your headset.\nClick \'Start\' to make the app listening for media button events</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="media_playback_warning">The app acts as a foreground music player - media playback is not possible while the app is active!</string>
 </resources>
